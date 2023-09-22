@@ -1,0 +1,27 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Alkamous.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="ServerName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">LocalHost</Value>
+    </Setting>
+    <Setting Name="Database" Type="System.String" Scope="User">
+      <Value Profile="(Default)">DBMS</Value>
+    </Setting>
+    <Setting Name="Userid" Type="System.String" Scope="User">
+      <Value Profile="(Default)">UserName</Value>
+    </Setting>
+    <Setting Name="password" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Password</Value>
+    </Setting>
+    <Setting Name="IsLogin" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="UserName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">User</Value>
+    </Setting>
+    <Setting Name="ExportPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">DefaultPath</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
