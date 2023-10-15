@@ -4,6 +4,7 @@ using System;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace Alkamous.View
@@ -69,6 +70,11 @@ namespace Alkamous.View
                     MessageBox.Show("All fields required");
                     return false;
                 }
+            }
+
+            if (!ValidateInputPrice())
+            {
+                return false;
             }
             return true;
         }
@@ -266,21 +272,15 @@ namespace Alkamous.View
             }
         }
 
-        private void TxtProductPrice_TextChanged(object sender, EventArgs e)
-        {
 
 
-        }
-
-        private void TxtProductPrice_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsDigit(e.KeyChar) && e.KeyChar != 8 && e.KeyChar != 46)
-            {
-                e.Handled = true;
-            }
-        }
 
         private void TxtProductPrice_Validated(object sender, EventArgs e)
+        {
+            ValidateInputPrice();
+        }
+
+        private bool ValidateInputPrice()
         {
             int dotCount = TxtProductPrice.Text.Count(c => c == '.');
             if (TxtProductPrice.Text != "" && dotCount <= 1)
@@ -288,13 +288,37 @@ namespace Alkamous.View
                 TxtProductPrice.Text = Convert.ToString(string.Format("{0:###,###,##0.00}", (Convert.ToDouble(TxtProductPrice.Text))));
                 TxtProductPrice.SelectionStart = TxtProductPrice.Text.Length;
                 TxtProductPrice.SelectionLength = 0;
+                return true;
             }
             else
             {
+                TxtProductPrice.Focus();
                 MessageBox.Show("the dot you add more than one check your price again, please");
+                return false;
             }
         }
 
+        public static int CountDots(string text)
+        {
+            Regex dotRegex = new Regex("\\.");
+            MatchCollection matches = dotRegex.Matches(text);
+            return matches.Count;
+        }
+
+        private void OnlyNumberandDotByKeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != 8 && e.KeyChar != 46)
+            {
+                e.Handled = true;
+            }
+
+            if (e.KeyChar == 46)
+            {
+                TextBox Textsender = (TextBox)sender;
+                if (CountDots(Textsender.Text) == 1)
+                    e.Handled = true;
+            }
+        }
 
         private void CheckWhoSendOrder(bool sender)
         {
