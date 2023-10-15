@@ -240,7 +240,7 @@ namespace Alkamous.View
         private void AddDataToDatagradviweAfterCheck()
         {
 
-            TxtAmount.Text = Controller.Chelp.CalculateAmount(TxtQTY.Text, TxtProduct_Price.Text, TxtCustomer_Currency.Text);
+            TxtAmount.Text = Chelp.CalculateAmount(TxtQTY.Text, TxtProduct_Price.Text, TxtCustomer_Currency.Text);
 
             foreach (var textBox in new[] { TxtProduct_Id, TxtQTY, TxtProduct_Price, TxtAmount })
             {
@@ -905,12 +905,7 @@ namespace Alkamous.View
         #endregion
 
         #region KeyPress OnlyNumber and OnlyNumberand with Dot and CountDots
-        public static int CountDots(string text)
-        {
-            Regex dotRegex = new Regex("\\.");
-            MatchCollection matches = dotRegex.Matches(text);
-            return matches.Count;
-        }
+
 
         private void OnlyNumberByKeyPress(object sender, KeyPressEventArgs e)
         {
@@ -919,6 +914,13 @@ namespace Alkamous.View
                 e.Handled = true;
             }
 
+        }
+
+        public static int CountDots(string text)
+        {
+            Regex dotRegex = new Regex("\\.");
+            MatchCollection matches = dotRegex.Matches(text);
+            return matches.Count;
         }
 
         private void OnlyNumberandDotByKeyPress(object sender, KeyPressEventArgs e)
@@ -1278,7 +1280,7 @@ namespace Alkamous.View
             catch (Exception ex)
             {
                 string MethodNames = System.Reflection.MethodBase.GetCurrentMethod().Name.ToString();
-                Controller.Chelp.WriteErrorLog(Name + " => " + MethodNames + " => " + ex.Message);
+                Chelp.WriteErrorLog(Name + " => " + MethodNames + " => " + ex.Message);
                 MessageBox.Show(ex.Message);
             }
         }
