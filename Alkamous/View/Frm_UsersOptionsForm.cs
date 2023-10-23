@@ -143,5 +143,26 @@ namespace Alkamous.View
                 }
             }
         }
+
+        private void BtnImportExportTerms_Click(object sender, EventArgs e)
+        {
+
+            try
+            {
+                Chelp chelp = new Chelp();
+
+                // to never open from if already opened
+                if (chelp.CheckOpened("Frm_TermsImportExport"))
+                    return;
+
+                chelp.ShowForm(new Frm_TermsImportExport());
+            }
+            catch (Exception ex)
+            {
+                var Btn = sender as Button;
+                Chelp.WriteErrorLog(Name + " => " + Btn.Name.ToString() + " => " + ex.Message);
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
 }

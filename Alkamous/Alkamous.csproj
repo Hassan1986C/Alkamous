@@ -247,6 +247,12 @@
     <Compile Include="View\Frm_TermsAddDeleteUpdate.Designer.cs">
       <DependentUpon>Frm_TermsAddDeleteUpdate.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\Frm_TermsImportExport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Frm_TermsImportExport.Designer.cs">
+      <DependentUpon>Frm_TermsImportExport.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\Frm_UserAddUpdateDelete.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -351,6 +357,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\Frm_TermsAddDeleteUpdate.resx">
       <DependentUpon>Frm_TermsAddDeleteUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Frm_TermsImportExport.resx">
+      <DependentUpon>Frm_TermsImportExport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\Frm_UserAddUpdateDelete.resx">
       <DependentUpon>Frm_UserAddUpdateDelete.cs</DependentUpon>

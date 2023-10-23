@@ -29,7 +29,7 @@ namespace Alkamous.View
             try
             {
                 string passwordLoginAsAdmin = "Admin" + DateTime.Now.ToString("hhMMdd");
-                MessageBox.Show("To Add User Need a Code", "Message ahmd");
+
                 if (passwordLoginAsAdmin == txtLoginAsAdmin.Text.Trim())
                 {
                     var (Password, UserKey, UserIV) = Chelp.encryptedPassword(TxtPassword.Text.Trim());
@@ -58,6 +58,10 @@ namespace Alkamous.View
                         MessageBox.Show($"problem ");
                     }
                 }
+                else
+                {
+                    MessageBox.Show("To Add User Need a Code", "Message ahmd");
+                }
             }
             catch (Exception ex)
             {
@@ -71,7 +75,7 @@ namespace Alkamous.View
 
         private void BtnDeleteUser_Click(object sender, EventArgs e)
         {
-            
+
             try
             {
                 string passwordLoginAsAdmin = "Admin" + DateTime.Now.ToString("hhMMdd");

@@ -16,7 +16,6 @@ namespace Alkamous.InterfaceForAllClass
 
     }
 
-
     interface ICustomers
     {
         bool Add_Customer(CTB_Customers item);
@@ -68,10 +67,10 @@ namespace Alkamous.InterfaceForAllClass
 
     }
 
-
     interface ITerms
     {
         bool Add_Term(string Term_En, string Term_Ar);
+        void Add_TermLIST(CTB_Terms item);
         bool Update_Term(string Term_AutoNum, string Term_En, string Term_Ar);
         bool Delete_Term(string Term_AutoNum);
         DataTable Get_AllTerm_BySearch(string search);
