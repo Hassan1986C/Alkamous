@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 
 namespace Alkamous.Model
 {
     public static class ExtensionMethod
     {
-        #region ExtensionMethod DataTable ToList<T>
+        #region ExtensionMethod to DataTable ToList<T>
 
         public static List<T> ToList<T>(this DataTable table) where T : class, new()
         {
@@ -46,5 +47,25 @@ namespace Alkamous.Model
         }
         #endregion
 
+
+        #region ExtensionMethod to stringRemoveSpecialCharacters
+        public static string RemoveSpecialCharacters(this string str)
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (char c in str)
+            {
+                if ((c >= '0' && c <= '9') || (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || c == '.' || c == '_')
+                {
+                    sb.Append(c);
+                }
+            }
+            return sb.ToString();
+        }
+        #endregion
+
     }
+
+
+
+
 }

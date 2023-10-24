@@ -164,5 +164,10 @@ namespace Alkamous.View
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void BtnImportExportProducts_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Sorry this option is Not ready at this time", "Message");
+        }
     }
 }

@@ -7,6 +7,7 @@ using System.IO;
 using System.Text;
 using System.Windows.Forms;
 
+
 namespace Alkamous.View
 {
     public partial class Frm_TermsImportExport : Form
@@ -82,11 +83,14 @@ namespace Alkamous.View
 
                 if (BtnExportTerms.Checked)
                 {
-                    DownloadTermsToServer();
+                    ExportTermsData2();
+                    //DownloadTermsToServer();
+                    ResetToDefault();
                 }
                 else
                 {
-                    UploadTermsToServer();
+                    ImportTermsToServer();
+                    ResetToDefault();
                 }
                 Cursor.Current = Cursors.Default;
 
@@ -185,49 +189,96 @@ namespace Alkamous.View
             }
         }
 
-        private void UploadTermsToServer()
+        private void ImportTermsToServer()
         {
 
-            if (csvDataList != null)
+            try
             {
-                foreach (var _terms in csvDataList)
+                if (csvDataList != null)
                 {
-                    OperationsofTerms.Add_TermLIST(_terms);
+                    int TotalRows = csvDataList.Count;
+                    foreach (var _terms in csvDataList)
+                    {
+                        OperationsofTerms.Add_TermLIST(_terms);
+                    }
+                    OperationsofTerms.InsertBulk();
+                    MessageBox.Show($"{TotalRows} Terms has been imported successfully");
+                    return;
                 }
-                OperationsofTerms.InsertBulk();
-                MessageBox.Show("Terms has been imported successfully");
-                return;
+                MessageBox.Show("failed try later");
             }
-            MessageBox.Show("failed try later");
-
-        }
-
-        private void DownloadTermsToServer()
-        {
-            string strPath = txtNewPth.Text.Trim();
-            DataTable ResultOfData = new DataTable();
-            ResultOfData = OperationsofTerms.Get_AllTerms();
-
-            StringBuilder strLog = new StringBuilder();
-            string ExportData = "";
-            //// loop for rows data to append in CSV 
-            for (int i = 0; i < ResultOfData.Rows.Count; i++)
+            catch (Exception ex)
             {
-                ExportData = "";
-                for (int j = 1; j < ResultOfData.Columns.Count; j++)
-                {
-                    ExportData += ResultOfData.Rows[i][j].ToString() + ",";
-                }
-                strLog.AppendLine(ExportData);
+
+                string MethodNames = System.Reflection.MethodBase.GetCurrentMethod().Name.ToString();
+                Chelp.WriteErrorLog(Name + " => " + MethodNames + " => " + ex.Message);
+                MessageBox.Show(ex.Message);
             }
-
-            File.AppendAllText(strPath + "\\" + "Terms.CSV", strLog + DateTime.Now.ToString() + "\r\n", Encoding.UTF8);
-
 
         }
 
 
+        private void ExportTermsData2()
+        {
+            try
+            {
+                DataTable ResultOfData = new DataTable();
+                ResultOfData = OperationsofTerms.Get_AllTerms();
+
+                if (ResultOfData.Rows.Count > 0)
+                {
+                    string strPath = txtNewPth.Text.Trim();
+                    string csvFilePath = Path.Combine(strPath, "ALKAMOUS Terms.CSV");
+
+                    StringBuilder strLog = new StringBuilder();
+                    strLog.AppendLine($"Terms English,Terms Arabic");
+
+                    int TotalRows = ResultOfData.Rows.Count;
+
+                    string ExportData = "";
+                    // loop for rows data to append in CSV 
+                    for (int i = 0; i < ResultOfData.Rows.Count; i++)
+                    {
+                        ExportData = "";
+                        for (int j = 1; j < ResultOfData.Columns.Count; j++)
+                        {
+                            string MyData = ResultOfData.Rows[i][j].ToString();
+
+                            StringBuilder stringBuilder = new StringBuilder();
+                            foreach (char c in MyData)
+                            {
+                                if (c == ',')
+                                {
+                                    stringBuilder.Append(" ");
+                                }
+                                else
+                                {
+                                    stringBuilder.Append(c);
+                                }
+                            }
+
+                            ExportData += stringBuilder + ",";
+                        }
+                        strLog.AppendLine(ExportData);
+                    }
+                    File.AppendAllText(csvFilePath, strLog + DateTime.Now.ToString() + "\r\n", Encoding.UTF8);
+                    MessageBox.Show($"{TotalRows} Terms has been Export successfully", "Info");
+                }
+                else
+                {
+                    MessageBox.Show($" NO Terms Export !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                string MethodNames = System.Reflection.MethodBase.GetCurrentMethod().Name.ToString();
+                Chelp.WriteErrorLog(Name + " => " + MethodNames + " => " + ex.Message);
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
+
 }
 
 

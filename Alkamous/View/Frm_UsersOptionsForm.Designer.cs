@@ -36,7 +36,6 @@
             this.BtnFixWordTempletefiles = new System.Windows.Forms.Button();
             this.BtnImportExportProducts = new System.Windows.Forms.Button();
             this.BtnImportExportTerms = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // BtnConnectionSQLServerSetting
@@ -158,6 +157,7 @@
             this.BtnImportExportProducts.TabIndex = 16;
             this.BtnImportExportProducts.Text = "Import Export products";
             this.BtnImportExportProducts.UseVisualStyleBackColor = false;
+            this.BtnImportExportProducts.Click += new System.EventHandler(this.BtnImportExportProducts_Click);
             // 
             // BtnImportExportTerms
             // 
@@ -176,28 +176,11 @@
             this.BtnImportExportTerms.UseVisualStyleBackColor = false;
             this.BtnImportExportTerms.Click += new System.EventHandler(this.BtnImportExportTerms_Click);
             // 
-            // button3
-            // 
-            this.button3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(61)))), ((int)(((byte)(77)))), ((int)(((byte)(178)))));
-            this.button3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button3.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.button3.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.MenuHighlight;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Font = new System.Drawing.Font("Century Gothic", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.ForeColor = System.Drawing.Color.White;
-            this.button3.Location = new System.Drawing.Point(755, 523);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(196, 161);
-            this.button3.TabIndex = 18;
-            this.button3.Text = "Not Use Yet";
-            this.button3.UseVisualStyleBackColor = false;
-            // 
             // Frm_UsersOptionsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1168, 746);
-            this.Controls.Add(this.button3);
             this.Controls.Add(this.BtnImportExportTerms);
             this.Controls.Add(this.BtnImportExportProducts);
             this.Controls.Add(this.BtnFixWordTempletefiles);
@@ -224,6 +207,5 @@
         private System.Windows.Forms.Button BtnFixWordTempletefiles;
         private System.Windows.Forms.Button BtnImportExportProducts;
         private System.Windows.Forms.Button BtnImportExportTerms;
-        private System.Windows.Forms.Button button3;
     }
 }
