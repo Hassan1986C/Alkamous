@@ -1,12 +1,16 @@
-﻿using Alkamous.Controller;
-using Alkamous.Model;
+﻿
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
-
+using CsvHelper;
+using CsvHelper.Configuration;
+using System.Globalization;
+using System.Collections.Generic;
+using Alkamous.Controller;
+using Alkamous.Model;
+using System.Linq;
 
 namespace Alkamous.View
 {
@@ -83,13 +87,12 @@ namespace Alkamous.View
 
                 if (BtnExportTerms.Checked)
                 {
-                    ExportTermsData2();
-                    //DownloadTermsToServer();
+                    ExportTermsData();
                     ResetToDefault();
                 }
                 else
                 {
-                    ImportTermsToServer();
+                    AddTermsToServer();
                     ResetToDefault();
                 }
                 Cursor.Current = Cursors.Default;
@@ -133,42 +136,28 @@ namespace Alkamous.View
                     string filePath = openFileDialog.FileName;
                     txtNewPth.Text = filePath;
 
-                    string[] lines = File.ReadAllLines(filePath, Encoding.Default);
-
-                    if (lines.Length < 1)
+                    using (var reader = new StreamReader(filePath, Encoding.Default))
+                    using (var csv = new CsvReader(reader, new CsvConfiguration(CultureInfo.InvariantCulture)))
                     {
-                        MessageBox.Show("File is empty.", "Error");
-                        return;
-                    }
+                        //csv.Configuration.HasHeaderRecord
 
-                    var headerColumns = lines[0].Split(',');
+                        var records = csv.GetRecords<CTB_Terms>().ToList();
 
-                    if (headerColumns.Length < 2 || headerColumns[0] != "Terms En" || headerColumns[1] != "Terms Ar")
-                    {
-                        MessageBox.Show("Header columns must be 'Terms En' and 'Terms Ar'.", "Error");
-                        return;
-                    }
-
-
-                    BtnSaveConfiguration.Enabled = true;
-
-                    csvDataList = new List<CTB_Terms>();
-
-                    for (int i = 1; i < lines.Length; i++)
-                    {
-                        string[] csvValues = lines[i].Split(',');
-
-                        if (csvValues.Length == 2)
+                        if (records.Count == 0)
                         {
-                            CTB_Terms cTB_Terms = new CTB_Terms
-                            {
-                                Term_En = csvValues[0],
-                                Term_Ar = csvValues[1],
-                            };
-
-                            csvDataList.Add(cTB_Terms);
+                            MessageBox.Show("No data found in the CSV file.", "Error");
+                            return;
                         }
+
+                        if (records.Count > 0)
+                        {
+                            BtnSaveConfiguration.Enabled = true;
+                        }
+
+                        csvDataList = records;
+
                     }
+
                 }
             }
         }
@@ -189,7 +178,7 @@ namespace Alkamous.View
             }
         }
 
-        private void ImportTermsToServer()
+        private void AddTermsToServer()
         {
 
             try
@@ -217,6 +206,52 @@ namespace Alkamous.View
 
         }
 
+
+        private void ExportTermsData()
+        {
+            try
+            {
+
+                DataTable ResultOfData = new DataTable();
+                ResultOfData = OperationsofTerms.Get_AllTerms();
+
+                if (ResultOfData.Rows.Count > 0)
+                {
+                    string strPath = txtNewPth.Text.Trim();
+                    string csvFilePath = Path.Combine(strPath, "ALKAMOUS Terms.CSV");
+
+                    int TotalRows = ResultOfData.Rows.Count;
+
+                    csvDataList = ResultOfData.ToList<CTB_Terms>();
+
+
+                    using (var fileStream = new FileStream(csvFilePath, FileMode.Create, FileAccess.Write))
+                    {
+                        using (var writer = new StreamWriter(fileStream, Encoding.Default))
+                        {
+                            using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
+                            {
+
+                                csv.WriteRecords(csvDataList);
+
+                            }
+                            MessageBox.Show($"{TotalRows} Terms has been Export successfully", "Info");
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show($" NO Terms Export !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                string MethodNames = System.Reflection.MethodBase.GetCurrentMethod().Name.ToString();
+                Chelp.WriteErrorLog(Name + " => " + MethodNames + " => " + ex.Message);
+                MessageBox.Show(ex.Message);
+            }
+        }
 
         private void ExportTermsData2()
         {
