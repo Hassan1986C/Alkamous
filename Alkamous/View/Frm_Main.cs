@@ -8,6 +8,7 @@ namespace Alkamous.View
     public partial class Frm_Main : Form
     {
         #region var
+
         Chelp chelp = new Chelp();
         private static Frm_Main frmMain;
 
@@ -38,7 +39,6 @@ namespace Alkamous.View
         {
             try
             {
-
 
                 // to never open from if already opened
                 if (chelp.CheckOpened("Frm_CustomersOptionsForm"))
@@ -129,6 +129,7 @@ namespace Alkamous.View
 
         private void PicLogo_Click(object sender, EventArgs e)
         {
+
             try
             {
                 if (LBUserName.Text != string.Empty)

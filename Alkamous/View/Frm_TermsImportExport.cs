@@ -18,7 +18,6 @@ namespace Alkamous.View
     {
 
         ClsOperationsofTerms OperationsofTerms = new ClsOperationsofTerms();
-
         List<CTB_Terms> csvDataList = null;
 
         public Frm_TermsImportExport()
@@ -109,55 +108,52 @@ namespace Alkamous.View
         {
             if ((BtnExportTerms.Checked == false) & (BtnImportTerms.Checked == false))
             {
-                MessageBox.Show("please select one of the options of below");
+                MessageBox.Show("please select one of the options above");
                 return;
             }
             if (BtnExportTerms.Checked)
             {
-                FolderBrowserDialog FBD = new FolderBrowserDialog();
-                FBD.Description = "Choose the path To Export the CSV File";
-
-                if (FBD.ShowDialog() == DialogResult.OK)
+                using (var folderBrowser = new FolderBrowserDialog
                 {
-                    txtNewPth.Text = FBD.SelectedPath;
-                    BtnSaveConfiguration.Enabled = true;
+                    Description = "Choose the path to export the CSV File"
+                })
+                {
+                    if (folderBrowser.ShowDialog() == DialogResult.OK)
+                    {
+                        txtNewPth.Text = folderBrowser.SelectedPath;
+                        BtnSaveConfiguration.Enabled = true;
+                    }
                 }
             }
             else
             {
-                OpenFileDialog openFileDialog = new OpenFileDialog
+                using (var _openFileDialog = new OpenFileDialog
                 {
                     Filter = "CSV files (*.csv)|*.csv",
-                    Title = "Select Terms CSV file",
-                };
-
-                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                    Title = "Select Terms CSV file"
+                })
                 {
-                    string filePath = openFileDialog.FileName;
+                    if (_openFileDialog.ShowDialog() != DialogResult.OK)
+                        return;
+
+                    string filePath = _openFileDialog.FileName;
                     txtNewPth.Text = filePath;
 
                     using (var reader = new StreamReader(filePath, Encoding.Default))
                     using (var csv = new CsvReader(reader, new CsvConfiguration(CultureInfo.InvariantCulture)))
                     {
-                        //csv.Configuration.HasHeaderRecord
-
                         var records = csv.GetRecords<CTB_Terms>().ToList();
-
-                        if (records.Count == 0)
-                        {
-                            MessageBox.Show("No data found in the CSV file.", "Error");
-                            return;
-                        }
 
                         if (records.Count > 0)
                         {
                             BtnSaveConfiguration.Enabled = true;
+                            csvDataList = records;
                         }
-
-                        csvDataList = records;
-
+                        else
+                        {
+                            MessageBox.Show("No data found in the CSV file.", "Error");
+                        }
                     }
-
                 }
             }
         }
@@ -227,7 +223,7 @@ namespace Alkamous.View
 
                     using (var fileStream = new FileStream(csvFilePath, FileMode.Create, FileAccess.Write))
                     {
-                        using (var writer = new StreamWriter(fileStream, Encoding.Default))
+                        using (var writer = new StreamWriter(fileStream, Encoding.UTF8))
                         {
                             using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
                             {
@@ -253,65 +249,7 @@ namespace Alkamous.View
             }
         }
 
-        private void ExportTermsData2()
-        {
-            try
-            {
-                DataTable ResultOfData = new DataTable();
-                ResultOfData = OperationsofTerms.Get_AllTerms();
 
-                if (ResultOfData.Rows.Count > 0)
-                {
-                    string strPath = txtNewPth.Text.Trim();
-                    string csvFilePath = Path.Combine(strPath, "ALKAMOUS Terms.CSV");
-
-                    StringBuilder strLog = new StringBuilder();
-                    strLog.AppendLine($"Terms English,Terms Arabic");
-
-                    int TotalRows = ResultOfData.Rows.Count;
-
-                    string ExportData = "";
-                    // loop for rows data to append in CSV 
-                    for (int i = 0; i < ResultOfData.Rows.Count; i++)
-                    {
-                        ExportData = "";
-                        for (int j = 1; j < ResultOfData.Columns.Count; j++)
-                        {
-                            string MyData = ResultOfData.Rows[i][j].ToString();
-
-                            StringBuilder stringBuilder = new StringBuilder();
-                            foreach (char c in MyData)
-                            {
-                                if (c == ',')
-                                {
-                                    stringBuilder.Append(" ");
-                                }
-                                else
-                                {
-                                    stringBuilder.Append(c);
-                                }
-                            }
-
-                            ExportData += stringBuilder + ",";
-                        }
-                        strLog.AppendLine(ExportData);
-                    }
-                    File.AppendAllText(csvFilePath, strLog + DateTime.Now.ToString() + "\r\n", Encoding.UTF8);
-                    MessageBox.Show($"{TotalRows} Terms has been Export successfully", "Info");
-                }
-                else
-                {
-                    MessageBox.Show($" NO Terms Export !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            catch (Exception ex)
-            {
-
-                string MethodNames = System.Reflection.MethodBase.GetCurrentMethod().Name.ToString();
-                Chelp.WriteErrorLog(Name + " => " + MethodNames + " => " + ex.Message);
-                MessageBox.Show(ex.Message);
-            }
-        }
     }
 
 }

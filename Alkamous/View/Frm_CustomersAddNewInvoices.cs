@@ -2,6 +2,7 @@
 using System;
 using System.Data;
 using System.Drawing;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -1314,5 +1315,30 @@ namespace Alkamous.View
 
         }
 
+
+        private bool CheckFormBeforeClosing()
+        {
+            if (groupBoxCustomerInfo.Controls.OfType<TextBox>().Any(txtBox => !string.IsNullOrEmpty(txtBox.Text)))
+                return true;
+
+            if (new[] { dtProducts, dtProductsConsumable, dtTermsInvoices }.Any(dataTable => dataTable.Rows.Count > 0))
+                return true;
+
+            if (new[] { DGVProducts, DGVProductsConsumable, DGVTermsInvose }.Any(dataGridView => dataGridView.Rows.Count > 0))
+                return true;
+
+            return false;
+        }
+
+        private void Frm_CustomersAddNewInvoices_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (CheckFormBeforeClosing())
+            {
+                if (MessageBox.Show("Do you want to exit, you will lose your temporary data ?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2) == DialogResult.No)
+                {
+                    e.Cancel = true;
+                }
+            }
+        }
     }
 }

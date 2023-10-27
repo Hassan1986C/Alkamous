@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Alkamous.View;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -36,14 +37,15 @@ namespace Alkamous.Controller
         {
             try
             {
-                CloseAllFormsExceptMain();
-
-                form.TopLevel = false;
-                form.Dock = DockStyle.Fill;
-                View.Frm_Main.FrmMain.PainleContener.Controls.Add(form);
-                View.Frm_Main.FrmMain.PainleContener.Tag = form;
-                form.Show();
-                form.Activate();
+                if (CloseAllFormsExceptMain())
+                {
+                    form.TopLevel = false;
+                    form.Dock = DockStyle.Fill;
+                    Frm_Main.FrmMain.PainleContener.Controls.Add(form);
+                    Frm_Main.FrmMain.PainleContener.Tag = form;
+                    form.Show();
+                    form.Activate();
+                }
             }
             catch (Exception ex)
             {
@@ -52,7 +54,7 @@ namespace Alkamous.Controller
             }
         }
 
-        private void CloseAllFormsExceptMain()
+        private bool CloseAllFormsExceptMain()
         {
             List<Form> formsToClose = Application.OpenForms.Cast<Form>().Where(frm => frm.Name != "Frm_Main").ToList();
 
@@ -60,6 +62,14 @@ namespace Alkamous.Controller
             {
                 form.Close();
             }
+            // check if all form colsed return true
+            var formsNOTClose = Application.OpenForms.Cast<Form>().Where(frm => frm.Name != "Frm_Main").ToList();
+            if (formsNOTClose.Count > 0)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         public bool CheckOpened(string frmName)

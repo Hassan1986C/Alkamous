@@ -1520,6 +1520,7 @@
             this.MaximumSize = new System.Drawing.Size(1100, 853);
             this.Name = "Frm_CustomersAddNewInvoices";
             this.Text = "Frm_CustomersAddNewInvoices";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Frm_CustomersAddNewInvoices_FormClosing);
             this.Load += new System.EventHandler(this.Frm_CustomersAddNewInvoices_Load);
             this.tabControlCustomers.ResumeLayout(false);
             this.tabPageCustomerInfo.ResumeLayout(false);
