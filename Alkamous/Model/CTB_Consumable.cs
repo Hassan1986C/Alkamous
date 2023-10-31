@@ -41,9 +41,6 @@ namespace Alkamous.Model
             Consumable_Amount = "Consumable_Amount";
         }
 
-        public static implicit operator CTB_Consumable(CTB_Invoices v)
-        {
-            throw new NotImplementedException();
-        }
+
     }
 }

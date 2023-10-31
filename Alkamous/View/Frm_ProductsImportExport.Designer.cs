@@ -1,6 +1,6 @@
 ﻿namespace Alkamous.View
 {
-    partial class Frm_TermsImportExport
+    partial class Frm_ProductsImportExport
     {
         /// <summary>
         /// Required designer variable.
@@ -28,20 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.label2 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.BtnResetToDefault = new System.Windows.Forms.Button();
             this.BtnSaveConfiguration = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.LbWaitSaveFile = new System.Windows.Forms.Label();
             this.BtnOpenPath = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.BtnImportTerms = new System.Windows.Forms.CheckBox();
-            this.BtnExportTerms = new System.Windows.Forms.CheckBox();
+            this.BtnImportProducts = new System.Windows.Forms.CheckBox();
+            this.BtnExportProducts = new System.Windows.Forms.CheckBox();
             this.txtNewPth = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.BtnBackToImportAndExport = new System.Windows.Forms.Button();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Century Gothic", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.Maroon;
+            this.label2.Location = new System.Drawing.Point(448, 50);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(279, 70);
+            this.label2.TabIndex = 58;
+            this.label2.Text = "Products";
             // 
             // groupBox4
             // 
@@ -52,7 +64,7 @@
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.groupBox4.Size = new System.Drawing.Size(796, 111);
-            this.groupBox4.TabIndex = 53;
+            this.groupBox4.TabIndex = 57;
             this.groupBox4.TabStop = false;
             // 
             // BtnResetToDefault
@@ -93,10 +105,11 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.LbWaitSaveFile);
             this.groupBox3.Controls.Add(this.BtnOpenPath);
             this.groupBox3.Controls.Add(this.label1);
-            this.groupBox3.Controls.Add(this.BtnImportTerms);
-            this.groupBox3.Controls.Add(this.BtnExportTerms);
+            this.groupBox3.Controls.Add(this.BtnImportProducts);
+            this.groupBox3.Controls.Add(this.BtnExportProducts);
             this.groupBox3.Controls.Add(this.txtNewPth);
             this.groupBox3.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.groupBox3.Location = new System.Drawing.Point(159, 157);
@@ -105,8 +118,20 @@
             this.groupBox3.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox3.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.groupBox3.Size = new System.Drawing.Size(796, 260);
-            this.groupBox3.TabIndex = 52;
+            this.groupBox3.TabIndex = 56;
             this.groupBox3.TabStop = false;
+            // 
+            // LbWaitSaveFile
+            // 
+            this.LbWaitSaveFile.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.LbWaitSaveFile.Font = new System.Drawing.Font("Tahoma", 25.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LbWaitSaveFile.Location = new System.Drawing.Point(7, 21);
+            this.LbWaitSaveFile.Name = "LbWaitSaveFile";
+            this.LbWaitSaveFile.Size = new System.Drawing.Size(782, 226);
+            this.LbWaitSaveFile.TabIndex = 59;
+            this.LbWaitSaveFile.Text = "Please Wait Until the processing Finish ...";
+            this.LbWaitSaveFile.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // BtnOpenPath
             // 
@@ -136,29 +161,29 @@
             this.label1.TabIndex = 54;
             this.label1.Text = "select one of the operations below :-";
             // 
-            // BtnImportTerms
+            // BtnImportProducts
             // 
-            this.BtnImportTerms.AutoSize = true;
-            this.BtnImportTerms.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnImportTerms.Location = new System.Drawing.Point(43, 137);
-            this.BtnImportTerms.Name = "BtnImportTerms";
-            this.BtnImportTerms.Size = new System.Drawing.Size(313, 27);
-            this.BtnImportTerms.TabIndex = 28;
-            this.BtnImportTerms.Text = "Import Terms Data CSV terms";
-            this.BtnImportTerms.UseVisualStyleBackColor = true;
-            this.BtnImportTerms.CheckedChanged += new System.EventHandler(this.BtnImportTerms_CheckedChanged);
+            this.BtnImportProducts.AutoSize = true;
+            this.BtnImportProducts.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnImportProducts.Location = new System.Drawing.Point(43, 137);
+            this.BtnImportProducts.Name = "BtnImportProducts";
+            this.BtnImportProducts.Size = new System.Drawing.Size(341, 27);
+            this.BtnImportProducts.TabIndex = 28;
+            this.BtnImportProducts.Text = "Import Products Data CSV terms";
+            this.BtnImportProducts.UseVisualStyleBackColor = true;
+            this.BtnImportProducts.CheckedChanged += new System.EventHandler(this.BtnImportProducts_CheckedChanged);
             // 
-            // BtnExportTerms
+            // BtnExportProducts
             // 
-            this.BtnExportTerms.AutoSize = true;
-            this.BtnExportTerms.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnExportTerms.Location = new System.Drawing.Point(43, 83);
-            this.BtnExportTerms.Name = "BtnExportTerms";
-            this.BtnExportTerms.Size = new System.Drawing.Size(250, 27);
-            this.BtnExportTerms.TabIndex = 27;
-            this.BtnExportTerms.Text = "Export Terms Data CSV";
-            this.BtnExportTerms.UseVisualStyleBackColor = true;
-            this.BtnExportTerms.CheckedChanged += new System.EventHandler(this.BtnExportTerms_CheckedChanged);
+            this.BtnExportProducts.AutoSize = true;
+            this.BtnExportProducts.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnExportProducts.Location = new System.Drawing.Point(43, 83);
+            this.BtnExportProducts.Name = "BtnExportProducts";
+            this.BtnExportProducts.Size = new System.Drawing.Size(278, 27);
+            this.BtnExportProducts.TabIndex = 27;
+            this.BtnExportProducts.Text = "Export Products Data CSV";
+            this.BtnExportProducts.UseVisualStyleBackColor = true;
+            this.BtnExportProducts.CheckedChanged += new System.EventHandler(this.BtnExportProducts_CheckedChanged);
             // 
             // txtNewPth
             // 
@@ -173,17 +198,6 @@
             this.txtNewPth.Size = new System.Drawing.Size(649, 28);
             this.txtNewPth.TabIndex = 5;
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Century Gothic", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.Maroon;
-            this.label2.Location = new System.Drawing.Point(448, 50);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(206, 70);
-            this.label2.TabIndex = 55;
-            this.label2.Text = "TERMS";
-            // 
             // BtnBackToImportAndExport
             // 
             this.BtnBackToImportAndExport.Anchor = System.Windows.Forms.AnchorStyles.Top;
@@ -197,12 +211,12 @@
             this.BtnBackToImportAndExport.Location = new System.Drawing.Point(159, 550);
             this.BtnBackToImportAndExport.Name = "BtnBackToImportAndExport";
             this.BtnBackToImportAndExport.Size = new System.Drawing.Size(796, 62);
-            this.BtnBackToImportAndExport.TabIndex = 56;
+            this.BtnBackToImportAndExport.TabIndex = 47;
             this.BtnBackToImportAndExport.Text = "Back TO Import And Export Form";
             this.BtnBackToImportAndExport.UseVisualStyleBackColor = false;
             this.BtnBackToImportAndExport.Click += new System.EventHandler(this.BtnBackToImportAndExport_Click);
             // 
-            // Frm_TermsImportExport
+            // Frm_ProductsImportExport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -212,8 +226,8 @@
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "Frm_TermsImportExport";
-            this.Text = "Frm_TermsImportExport";
+            this.Name = "Frm_ProductsImportExport";
+            this.Text = "Frm_ProductsImportExport";
             this.groupBox4.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
@@ -224,16 +238,17 @@
 
         #endregion
 
+        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Button BtnResetToDefault;
         private System.Windows.Forms.Button BtnSaveConfiguration;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Button BtnOpenPath;
-        private System.Windows.Forms.TextBox txtNewPth;
-        private System.Windows.Forms.CheckBox BtnImportTerms;
-        private System.Windows.Forms.CheckBox BtnExportTerms;
-        private System.Windows.Forms.Button BtnResetToDefault;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.CheckBox BtnImportProducts;
+        private System.Windows.Forms.CheckBox BtnExportProducts;
+        private System.Windows.Forms.TextBox txtNewPth;
         private System.Windows.Forms.Button BtnBackToImportAndExport;
+        public System.Windows.Forms.Label LbWaitSaveFile;
     }
 }

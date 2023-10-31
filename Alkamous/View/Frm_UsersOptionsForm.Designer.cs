@@ -34,8 +34,6 @@
             this.BtnUserAddUpdateDelete = new System.Windows.Forms.Button();
             this.BtnExportPathWord = new System.Windows.Forms.Button();
             this.BtnFixWordTempletefiles = new System.Windows.Forms.Button();
-            this.BtnImportExportProducts = new System.Windows.Forms.Button();
-            this.BtnImportExportTerms = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // BtnConnectionSQLServerSetting
@@ -47,9 +45,9 @@
             this.BtnConnectionSQLServerSetting.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnConnectionSQLServerSetting.Font = new System.Drawing.Font("Century Gothic", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnConnectionSQLServerSetting.ForeColor = System.Drawing.Color.White;
-            this.BtnConnectionSQLServerSetting.Location = new System.Drawing.Point(755, 295);
+            this.BtnConnectionSQLServerSetting.Location = new System.Drawing.Point(777, 418);
             this.BtnConnectionSQLServerSetting.Name = "BtnConnectionSQLServerSetting";
-            this.BtnConnectionSQLServerSetting.Size = new System.Drawing.Size(196, 161);
+            this.BtnConnectionSQLServerSetting.Size = new System.Drawing.Size(300, 250);
             this.BtnConnectionSQLServerSetting.TabIndex = 13;
             this.BtnConnectionSQLServerSetting.Text = "Connection Settings";
             this.BtnConnectionSQLServerSetting.UseVisualStyleBackColor = false;
@@ -65,9 +63,9 @@
             this.BtnUsersLog.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnUsersLog.Font = new System.Drawing.Font("Century Gothic", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnUsersLog.ForeColor = System.Drawing.Color.White;
-            this.BtnUsersLog.Location = new System.Drawing.Point(133, 295);
+            this.BtnUsersLog.Location = new System.Drawing.Point(76, 418);
             this.BtnUsersLog.Name = "BtnUsersLog";
-            this.BtnUsersLog.Size = new System.Drawing.Size(196, 161);
+            this.BtnUsersLog.Size = new System.Drawing.Size(300, 250);
             this.BtnUsersLog.TabIndex = 12;
             this.BtnUsersLog.Text = "Users Log";
             this.BtnUsersLog.UseVisualStyleBackColor = false;
@@ -82,9 +80,9 @@
             this.BtnUserChangePassword.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnUserChangePassword.Font = new System.Drawing.Font("Century Gothic", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnUserChangePassword.ForeColor = System.Drawing.Color.White;
-            this.BtnUserChangePassword.Location = new System.Drawing.Point(444, 67);
+            this.BtnUserChangePassword.Location = new System.Drawing.Point(421, 91);
             this.BtnUserChangePassword.Name = "BtnUserChangePassword";
-            this.BtnUserChangePassword.Size = new System.Drawing.Size(196, 161);
+            this.BtnUserChangePassword.Size = new System.Drawing.Size(300, 250);
             this.BtnUserChangePassword.TabIndex = 11;
             this.BtnUserChangePassword.Text = "Change password";
             this.BtnUserChangePassword.UseVisualStyleBackColor = false;
@@ -100,9 +98,9 @@
             this.BtnUserAddUpdateDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnUserAddUpdateDelete.Font = new System.Drawing.Font("Century Gothic", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnUserAddUpdateDelete.ForeColor = System.Drawing.Color.White;
-            this.BtnUserAddUpdateDelete.Location = new System.Drawing.Point(133, 67);
+            this.BtnUserAddUpdateDelete.Location = new System.Drawing.Point(76, 91);
             this.BtnUserAddUpdateDelete.Name = "BtnUserAddUpdateDelete";
-            this.BtnUserAddUpdateDelete.Size = new System.Drawing.Size(196, 161);
+            this.BtnUserAddUpdateDelete.Size = new System.Drawing.Size(300, 250);
             this.BtnUserAddUpdateDelete.TabIndex = 10;
             this.BtnUserAddUpdateDelete.Text = "Manage Users";
             this.BtnUserAddUpdateDelete.UseVisualStyleBackColor = false;
@@ -117,9 +115,9 @@
             this.BtnExportPathWord.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnExportPathWord.Font = new System.Drawing.Font("Century Gothic", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnExportPathWord.ForeColor = System.Drawing.Color.White;
-            this.BtnExportPathWord.Location = new System.Drawing.Point(755, 67);
+            this.BtnExportPathWord.Location = new System.Drawing.Point(777, 91);
             this.BtnExportPathWord.Name = "BtnExportPathWord";
-            this.BtnExportPathWord.Size = new System.Drawing.Size(196, 161);
+            this.BtnExportPathWord.Size = new System.Drawing.Size(300, 250);
             this.BtnExportPathWord.TabIndex = 14;
             this.BtnExportPathWord.Text = "Export Path MS Word";
             this.BtnExportPathWord.UseVisualStyleBackColor = false;
@@ -134,55 +132,19 @@
             this.BtnFixWordTempletefiles.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnFixWordTempletefiles.Font = new System.Drawing.Font("Century Gothic", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnFixWordTempletefiles.ForeColor = System.Drawing.Color.White;
-            this.BtnFixWordTempletefiles.Location = new System.Drawing.Point(444, 295);
+            this.BtnFixWordTempletefiles.Location = new System.Drawing.Point(421, 418);
             this.BtnFixWordTempletefiles.Name = "BtnFixWordTempletefiles";
-            this.BtnFixWordTempletefiles.Size = new System.Drawing.Size(196, 161);
+            this.BtnFixWordTempletefiles.Size = new System.Drawing.Size(300, 250);
             this.BtnFixWordTempletefiles.TabIndex = 15;
             this.BtnFixWordTempletefiles.Text = "Fix files";
             this.BtnFixWordTempletefiles.UseVisualStyleBackColor = false;
             this.BtnFixWordTempletefiles.Click += new System.EventHandler(this.BtnFixWordTempletefiles_Click);
-            // 
-            // BtnImportExportProducts
-            // 
-            this.BtnImportExportProducts.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(61)))), ((int)(((byte)(77)))), ((int)(((byte)(178)))));
-            this.BtnImportExportProducts.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BtnImportExportProducts.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.BtnImportExportProducts.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.MenuHighlight;
-            this.BtnImportExportProducts.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnImportExportProducts.Font = new System.Drawing.Font("Century Gothic", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnImportExportProducts.ForeColor = System.Drawing.Color.White;
-            this.BtnImportExportProducts.Location = new System.Drawing.Point(133, 523);
-            this.BtnImportExportProducts.Name = "BtnImportExportProducts";
-            this.BtnImportExportProducts.Size = new System.Drawing.Size(196, 161);
-            this.BtnImportExportProducts.TabIndex = 16;
-            this.BtnImportExportProducts.Text = "Import Export products";
-            this.BtnImportExportProducts.UseVisualStyleBackColor = false;
-            this.BtnImportExportProducts.Click += new System.EventHandler(this.BtnImportExportProducts_Click);
-            // 
-            // BtnImportExportTerms
-            // 
-            this.BtnImportExportTerms.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(61)))), ((int)(((byte)(77)))), ((int)(((byte)(178)))));
-            this.BtnImportExportTerms.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BtnImportExportTerms.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.BtnImportExportTerms.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.MenuHighlight;
-            this.BtnImportExportTerms.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnImportExportTerms.Font = new System.Drawing.Font("Century Gothic", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnImportExportTerms.ForeColor = System.Drawing.Color.White;
-            this.BtnImportExportTerms.Location = new System.Drawing.Point(444, 523);
-            this.BtnImportExportTerms.Name = "BtnImportExportTerms";
-            this.BtnImportExportTerms.Size = new System.Drawing.Size(196, 161);
-            this.BtnImportExportTerms.TabIndex = 17;
-            this.BtnImportExportTerms.Text = "Import Export Terms";
-            this.BtnImportExportTerms.UseVisualStyleBackColor = false;
-            this.BtnImportExportTerms.Click += new System.EventHandler(this.BtnImportExportTerms_Click);
             // 
             // Frm_UsersOptionsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1168, 746);
-            this.Controls.Add(this.BtnImportExportTerms);
-            this.Controls.Add(this.BtnImportExportProducts);
             this.Controls.Add(this.BtnFixWordTempletefiles);
             this.Controls.Add(this.BtnExportPathWord);
             this.Controls.Add(this.BtnConnectionSQLServerSetting);
@@ -205,7 +167,5 @@
         private System.Windows.Forms.Button BtnUserAddUpdateDelete;
         private System.Windows.Forms.Button BtnExportPathWord;
         private System.Windows.Forms.Button BtnFixWordTempletefiles;
-        private System.Windows.Forms.Button BtnImportExportProducts;
-        private System.Windows.Forms.Button BtnImportExportTerms;
     }
 }

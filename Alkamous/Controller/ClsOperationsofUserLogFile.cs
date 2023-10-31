@@ -62,7 +62,7 @@ namespace Alkamous.Controller
 
             if (dt.Rows.Count > 0)
             {
-                var Mylist = dt.ToList<CTB_UserLog>();
+                var Mylist = dt.ConvertDataTableToList<CTB_UserLog>();
 
                 return Mylist;
             }
@@ -86,7 +86,7 @@ namespace Alkamous.Controller
 
             if (dt.Rows.Count > 0)
             {
-                var Mylist = dt.ToList<CTB_UserLog>();
+                var Mylist = dt.ConvertDataTableToList<CTB_UserLog>();
 
                 return Mylist;
             }

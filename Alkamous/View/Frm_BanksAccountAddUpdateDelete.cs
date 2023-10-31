@@ -231,7 +231,7 @@ namespace Alkamous.View
             {
 
                 var result = clsOperationsofBanks.Get_ByBank_Definition(DGVBanks.CurrentRow.Cells["Bank_Definition"].Value.ToString());
-
+                   
 
                 TxtBank_Definition.Text = result.Rows[0]["Bank_Definition"].ToString();
                 TxtBeneficiary_Name.Text = result.Rows[0]["Bank_Beneficiary_Name"].ToString();

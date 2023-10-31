@@ -86,7 +86,7 @@ namespace Alkamous.Controller
 
             if (dt.Rows.Count > 0)
             {
-                var Mylist = dt.ToList<CTB_Users>();
+                var Mylist = dt.ConvertDataTableToList<CTB_Users>();
 
                 return Mylist;
             }
@@ -107,7 +107,7 @@ namespace Alkamous.Controller
             DataTable dt = DAL.SelectDB(ProcedureName, SL);
             if (dt.Rows.Count > 0)
             {
-                var Mylist = dt.ToList<CTB_Users>();
+                var Mylist = dt.ConvertDataTableToList<CTB_Users>();
                 return Mylist[0];
             }
             else

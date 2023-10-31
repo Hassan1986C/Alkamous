@@ -199,6 +199,12 @@
     <Compile Include="View\Frm_BanksAccountAddUpdateDelete.Designer.cs">
       <DependentUpon>Frm_BanksAccountAddUpdateDelete.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\Frm_BanksAccountImportExport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Frm_BanksAccountImportExport.Designer.cs">
+      <DependentUpon>Frm_BanksAccountImportExport.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\Frm_ConnectionSQLServerSetting.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -210,6 +216,12 @@
     </Compile>
     <Compile Include="View\Frm_CustomerInfo.Designer.cs">
       <DependentUpon>Frm_CustomerInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Frm_CustomerInfoImportExport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Frm_CustomerInfoImportExport.Designer.cs">
+      <DependentUpon>Frm_CustomerInfoImportExport.cs</DependentUpon>
     </Compile>
     <Compile Include="View\Frm_CustomerInfoLoad.cs">
       <SubType>Form</SubType>
@@ -234,6 +246,12 @@
     </Compile>
     <Compile Include="View\Frm_CustomersOptionsForm.Designer.cs">
       <DependentUpon>Frm_CustomersOptionsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Frm_CustomersOptionsImportExportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Frm_CustomersOptionsImportExportForm.Designer.cs">
+      <DependentUpon>Frm_CustomersOptionsImportExportForm.cs</DependentUpon>
     </Compile>
     <Compile Include="View\Frm_CustomersOptionsOthersForm.cs">
       <SubType>Form</SubType>
@@ -270,6 +288,12 @@
     </Compile>
     <Compile Include="View\Frm_ProductsAddDeleteUpdate.Designer.cs">
       <DependentUpon>Frm_ProductsAddDeleteUpdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Frm_ProductsImportExport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Frm_ProductsImportExport.Designer.cs">
+      <DependentUpon>Frm_ProductsImportExport.cs</DependentUpon>
     </Compile>
     <Compile Include="View\Frm_Terms.cs">
       <SubType>Form</SubType>
@@ -352,11 +376,17 @@
     <EmbeddedResource Include="View\Frm_BanksAccountAddUpdateDelete.resx">
       <DependentUpon>Frm_BanksAccountAddUpdateDelete.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\Frm_BanksAccountImportExport.resx">
+      <DependentUpon>Frm_BanksAccountImportExport.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\Frm_ConnectionSQLServerSetting.resx">
       <DependentUpon>Frm_ConnectionSQLServerSetting.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\Frm_CustomerInfo.resx">
       <DependentUpon>Frm_CustomerInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Frm_CustomerInfoImportExport.resx">
+      <DependentUpon>Frm_CustomerInfoImportExport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\Frm_CustomerInfoLoad.resx">
       <DependentUpon>Frm_CustomerInfoLoad.cs</DependentUpon>
@@ -369,6 +399,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\Frm_CustomersOptionsForm.resx">
       <DependentUpon>Frm_CustomersOptionsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Frm_CustomersOptionsImportExportForm.resx">
+      <DependentUpon>Frm_CustomersOptionsImportExportForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\Frm_CustomersOptionsOthersForm.resx">
       <DependentUpon>Frm_CustomersOptionsOthersForm.cs</DependentUpon>
@@ -387,6 +420,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\Frm_ProductsAddDeleteUpdate.resx">
       <DependentUpon>Frm_ProductsAddDeleteUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Frm_ProductsImportExport.resx">
+      <DependentUpon>Frm_ProductsImportExport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\Frm_Terms.resx">
       <DependentUpon>Frm_Terms.cs</DependentUpon>

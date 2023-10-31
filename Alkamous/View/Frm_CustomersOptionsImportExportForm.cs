@@ -1,27 +1,34 @@
 ﻿using Alkamous.Controller;
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Alkamous.View
 {
-    public partial class Frm_CustomersOptionsOthersForm : Form
+    public partial class Frm_CustomersOptionsImportExportForm : Form
     {
-        public Frm_CustomersOptionsOthersForm()
+        public Frm_CustomersOptionsImportExportForm()
         {
             InitializeComponent();
         }
 
-        private void BtnProducts_Click(object sender, EventArgs e)
+        private void BtnImportExportTerms_Click(object sender, EventArgs e)
         {
             try
             {
                 Chelp chelp = new Chelp();
 
                 // to never open from if already opened
-                if (chelp.CheckOpened("Frm_ProductsAddDeleteUpdate"))
+                if (chelp.CheckOpened("Frm_TermsImportExport"))
                     return;
 
-                chelp.ShowForm(new Frm_ProductsAddDeleteUpdate());
+                chelp.ShowForm(new Frm_TermsImportExport());
             }
             catch (Exception ex)
             {
@@ -31,17 +38,39 @@ namespace Alkamous.View
             }
         }
 
-        private void BtnTerms_Click(object sender, EventArgs e)
+        private void BtnImportExportProducts_Click(object sender, EventArgs e)
+        {
+
+            try
+            {
+                Chelp chelp = new Chelp();
+
+                // to never open from if already opened
+                if (chelp.CheckOpened("Frm_ProductsImportExport"))
+                    return;
+
+                chelp.ShowForm(new Frm_ProductsImportExport());
+            }
+            catch (Exception ex)
+            {
+                var Btn = sender as Button;
+                Chelp.WriteErrorLog(Name + " => " + Btn.Name.ToString() + " => " + ex.Message);
+                MessageBox.Show(ex.Message);
+            }
+
+        }
+
+        private void BtnImportExportBankAccount_Click(object sender, EventArgs e)
         {
             try
             {
                 Chelp chelp = new Chelp();
 
                 // to never open from if already opened
-                if (chelp.CheckOpened("Frm_TermsAddDeleteUpdate"))
+                if (chelp.CheckOpened("Frm_BanksAccountImportExport"))
                     return;
 
-                chelp.ShowForm(new Frm_TermsAddDeleteUpdate());
+                chelp.ShowForm(new Frm_BanksAccountImportExport());
             }
             catch (Exception ex)
             {
@@ -51,17 +80,17 @@ namespace Alkamous.View
             }
         }
 
-        private void BtnBanks_Click(object sender, EventArgs e)
+        private void BtnImportExportContactDetails_Click(object sender, EventArgs e)
         {
             try
             {
                 Chelp chelp = new Chelp();
 
                 // to never open from if already opened
-                if (chelp.CheckOpened("Frm_BanksAccountAddUpdateDelete"))
+                if (chelp.CheckOpened("Frm_CustomerInfoImportExport"))
                     return;
 
-                chelp.ShowForm(new Frm_BanksAccountAddUpdateDelete());
+                chelp.ShowForm(new Frm_CustomerInfoImportExport());
             }
             catch (Exception ex)
             {
@@ -69,27 +98,6 @@ namespace Alkamous.View
                 Chelp.WriteErrorLog(Name + " => " + Btn.Name.ToString() + " => " + ex.Message);
                 MessageBox.Show(ex.Message);
             }
-        }
-
-        private void BtnImportExport_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                Chelp chelp = new Chelp();
-
-                // to never open from if already opened
-                if (chelp.CheckOpened("Frm_CustomersOptionsImportExportForm"))
-                    return;
-
-                chelp.ShowForm(new Frm_CustomersOptionsImportExportForm());
-            }
-            catch (Exception ex)
-            {
-                var Btn = sender as Button;
-                Chelp.WriteErrorLog(Name + " => " + Btn.Name.ToString() + " => " + ex.Message);
-                MessageBox.Show(ex.Message);
-            }
-
         }
     }
 }

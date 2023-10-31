@@ -1,26 +1,23 @@
-﻿
-using System;
-using System.Data;
-using System.IO;
-using System.Text;
-using System.Windows.Forms;
+﻿using Alkamous.Controller;
+using Alkamous.Model;
 using CsvHelper;
 using CsvHelper.Configuration;
-using System.Globalization;
+using System;
 using System.Collections.Generic;
-using Alkamous.Controller;
-using Alkamous.Model;
+using System.Data;
+using System.Globalization;
+using System.IO;
 using System.Linq;
+using System.Text;
+using System.Windows.Forms;
 
 namespace Alkamous.View
 {
-    public partial class Frm_TermsImportExport : Form
+    public partial class Frm_BanksAccountImportExport : Form
     {
-
-        ClsOperationsofTerms OperationsofTerms = new ClsOperationsofTerms();
-        List<CTB_Terms> csvDataList = null;
-
-        public Frm_TermsImportExport()
+        ClsOperationsofBanks OperationsofBanks = new ClsOperationsofBanks();
+        List<CTB_Banks> csvDataList = null;
+        public Frm_BanksAccountImportExport()
         {
             InitializeComponent();
             ResetToDefault();
@@ -29,23 +26,23 @@ namespace Alkamous.View
         private void CheckedIsSelected(string WhoSender)
         {
             //directly assign the result
-            bool Result = WhoSender == "ExportTerms";
+            bool Result = WhoSender == "ExportBanks";
 
             txtNewPth.Text = "";
             csvDataList = null;
 
-            BtnExportTerms.Checked = Result;
-            BtnImportTerms.Checked = !(Result);
+            BtnExportBanksAccount.Checked = Result;
+            BtnImportBanksAccount.Checked = !(Result);
 
-            BtnExportTerms.Enabled = !(Result);
-            BtnImportTerms.Enabled = (Result);
+            BtnExportBanksAccount.Enabled = !(Result);
+            BtnImportBanksAccount.Enabled = (Result);
 
             BtnSaveConfiguration.Enabled = false;
         }
 
         private bool CheckInputAndPath()
         {
-            if ((BtnExportTerms.Checked == false) & (BtnImportTerms.Checked == false))
+            if ((BtnExportBanksAccount.Checked == false) & (BtnImportBanksAccount.Checked == false))
             {
                 MessageBox.Show("please select one of the options of below");
                 return false;
@@ -67,51 +64,41 @@ namespace Alkamous.View
             csvDataList = null;
             txtNewPth.Text = "";
 
-            BtnExportTerms.Checked = false;
-            BtnImportTerms.Checked = false;
+            BtnExportBanksAccount.Checked = false;
+            BtnImportBanksAccount.Checked = false;
 
-            BtnExportTerms.Enabled = true;
-            BtnImportTerms.Enabled = true;
+            BtnExportBanksAccount.Enabled = true;
+            BtnImportBanksAccount.Enabled = true;
 
             BtnSaveConfiguration.Enabled = false;
 
 
         }
 
-        private void BtnSaveConfiguration_Click(object sender, EventArgs e)
+        private void BtnExportBanksAccount_CheckedChanged(object sender, EventArgs e)
         {
-            if (CheckInputAndPath())
+            if (BtnExportBanksAccount.Checked)
             {
-                Cursor.Current = Cursors.WaitCursor;
-
-                if (BtnExportTerms.Checked)
-                {
-                    ExportTermsData();
-                    ResetToDefault();
-                }
-                else
-                {
-                    AddTermsToServer();
-                    ResetToDefault();
-                }
-                Cursor.Current = Cursors.Default;
-
+                CheckedIsSelected("ExportBanks");
             }
         }
 
-        private void BtnResetToDefault_Click(object sender, EventArgs e)
+        private void BtnImportBanksAccount_CheckedChanged(object sender, EventArgs e)
         {
-            ResetToDefault();
+            if (BtnImportBanksAccount.Checked)
+            {
+                CheckedIsSelected("ImportBanks");
+            }
         }
 
         private void BtnOpenPath_Click(object sender, EventArgs e)
         {
-            if ((BtnExportTerms.Checked == false) & (BtnImportTerms.Checked == false))
+            if ((BtnExportBanksAccount.Checked == false) & (BtnImportBanksAccount.Checked == false))
             {
                 MessageBox.Show("please select one of the options above");
                 return;
             }
-            if (BtnExportTerms.Checked)
+            if (BtnExportBanksAccount.Checked)
             {
                 using (var folderBrowser = new FolderBrowserDialog
                 {
@@ -130,7 +117,7 @@ namespace Alkamous.View
                 using (var _openFileDialog = new OpenFileDialog
                 {
                     Filter = "CSV files (*.csv)|*.csv",
-                    Title = "Select Terms CSV file"
+                    Title = "Select Banks CSV file"
                 })
                 {
                     if (_openFileDialog.ShowDialog() != DialogResult.OK)
@@ -142,7 +129,7 @@ namespace Alkamous.View
                     using (var reader = new StreamReader(filePath, Encoding.Default))
                     using (var csv = new CsvReader(reader, new CsvConfiguration(CultureInfo.InvariantCulture)))
                     {
-                        var records = csv.GetRecords<CTB_Terms>().ToList();
+                        var records = csv.GetRecords<CTB_Banks>().ToList();
 
                         if (records.Count > 0)
                         {
@@ -158,36 +145,52 @@ namespace Alkamous.View
             }
         }
 
-        private void BtnExportTerms_CheckedChanged(object sender, EventArgs e)
+        private void BtnSaveConfiguration_Click(object sender, EventArgs e)
         {
-            if (BtnExportTerms.Checked)
+            if (CheckInputAndPath())
             {
-                CheckedIsSelected("ExportTerms");
+                Cursor.Current = Cursors.WaitCursor;
+
+                if (BtnExportBanksAccount.Checked)
+                {
+                    ExportBanksData();
+                    ResetToDefault();
+                }
+                else
+                {
+                    AddBanksToServer();
+                    ResetToDefault();
+                }
+                Cursor.Current = Cursors.Default;
+
             }
         }
 
-        private void BtnImportTerms_CheckedChanged(object sender, EventArgs e)
+        private void BtnResetToDefault_Click(object sender, EventArgs e)
         {
-            if (BtnImportTerms.Checked)
-            {
-                CheckedIsSelected("ImportTerms");
-            }
+            ResetToDefault();
         }
 
-        private void AddTermsToServer()
+        private void AddBanksToServer()
         {
 
             try
             {
                 if (csvDataList != null)
                 {
-                    int TotalRows = csvDataList.Count;
-                    foreach (var _terms in csvDataList)
+                    int totalBancks = csvDataList.Count; ;
+                    int importedBanks = 0;
+
+                    foreach (var _Banks in csvDataList)
                     {
-                        OperationsofTerms.Add_TermLIST(_terms);
+                        if (!OperationsofBanks.Check_Bank_DefinitionNotDuplicate(_Banks.Bank_Definition))
+                        {
+                            OperationsofBanks.Add_Acount(_Banks);
+                            importedBanks++;
+                        }
                     }
-                    OperationsofTerms.InsertBulk();
-                    MessageBox.Show($"{TotalRows} Terms has been imported successfully");
+
+                    MessageBox.Show($"{importedBanks} Customers has been imported successfully from {totalBancks} Customers");
                     return;
                 }
                 MessageBox.Show("failed try later");
@@ -202,22 +205,49 @@ namespace Alkamous.View
 
         }
 
-        private void ExportTermsData()
+        private void ExportBanksData()
         {
             try
             {
 
                 DataTable ResultOfData = new DataTable();
-                ResultOfData = OperationsofTerms.Get_AllTerms();
+                ResultOfData = OperationsofBanks.Get_All();
 
                 if (ResultOfData.Rows.Count > 0)
                 {
                     string strPath = txtNewPth.Text.Trim();
-                    string csvFilePath = Path.Combine(strPath, "ALKAMOUS Terms.CSV");
+                    string csvFilePath = Path.Combine(strPath, "ALKAMOUS Banks Accounts.CSV");
 
                     int TotalRows = ResultOfData.Rows.Count;
 
-                    csvDataList = ResultOfData.ConvertDataTableToList<CTB_Terms>();
+
+                    csvDataList = new List<CTB_Banks>();
+
+                    for (int i = 0; i < ResultOfData.Rows.Count; i++)
+                    {
+
+
+                        var BanckAccountResult = OperationsofBanks.Get_ByBank_Definition(ResultOfData.Rows[i][1].ToString());
+
+                        var Tempclass = new CTB_Banks
+                        {
+                            Bank_AutoNumber = BanckAccountResult.Rows[0]["Bank_AutoNumber"].ToString(),
+                            Bank_Definition = BanckAccountResult.Rows[0]["Bank_Definition"].ToString(),
+                            Bank_Beneficiary_Name = BanckAccountResult.Rows[0]["Bank_Beneficiary_Name"].ToString(),
+                            Bank_Bank_Name = BanckAccountResult.Rows[0]["Bank_Bank_Name"].ToString(),
+                            Bank_Branch = BanckAccountResult.Rows[0]["Bank_Branch"].ToString(),
+                            Bank_Branch_Code = BanckAccountResult.Rows[0]["Bank_Branch_Code"].ToString(),
+                            Bank_Bank_Address = BanckAccountResult.Rows[0]["Bank_Bank_Address"].ToString(),
+                            Bank_Swift_Code = BanckAccountResult.Rows[0]["Bank_Swift_Code"].ToString(),
+                            Bank_Account_Number = BanckAccountResult.Rows[0]["Bank_Account_Number"].ToString(),
+                            Bank_IBAN_Number = BanckAccountResult.Rows[0]["Bank_IBAN_Number"].ToString(),
+                            Bank_COUNTRY = BanckAccountResult.Rows[0]["Bank_COUNTRY"].ToString(),
+                            Bank_Account_currency = BanckAccountResult.Rows[0]["Bank_Account_currency"].ToString(),
+                        };
+
+                        csvDataList.Add(Tempclass);
+
+                    }
 
 
                     using (var fileStream = new FileStream(csvFilePath, FileMode.Create, FileAccess.Write))
@@ -230,13 +260,13 @@ namespace Alkamous.View
                                 csv.WriteRecords(csvDataList);
 
                             }
-                            MessageBox.Show($"{TotalRows} Terms has been Export successfully", "Info");
+                            MessageBox.Show($"{TotalRows} Banks has been Export successfully", "Info");
                         }
                     }
                 }
                 else
                 {
-                    MessageBox.Show($" NO Terms Export !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show($" NO Banks Export !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
@@ -268,5 +298,4 @@ namespace Alkamous.View
             }
         }
     }
-
 }

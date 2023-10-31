@@ -1,26 +1,25 @@
-﻿
-using System;
-using System.Data;
-using System.IO;
-using System.Text;
-using System.Windows.Forms;
+﻿using Alkamous.Controller;
+using Alkamous.Model;
 using CsvHelper;
 using CsvHelper.Configuration;
-using System.Globalization;
+using System;
 using System.Collections.Generic;
-using Alkamous.Controller;
-using Alkamous.Model;
+using System.Data;
+using System.Globalization;
+using System.IO;
 using System.Linq;
+using System.Text;
+using System.Windows.Forms;
 
 namespace Alkamous.View
 {
-    public partial class Frm_TermsImportExport : Form
+    public partial class Frm_CustomerInfoImportExport : Form
     {
 
-        ClsOperationsofTerms OperationsofTerms = new ClsOperationsofTerms();
-        List<CTB_Terms> csvDataList = null;
+        ClsOperationsofCustomerInfo operationsofCustomerInfo = new ClsOperationsofCustomerInfo();
+        List<CTB_CustomerInfo> csvDataList = null;
 
-        public Frm_TermsImportExport()
+        public Frm_CustomerInfoImportExport()
         {
             InitializeComponent();
             ResetToDefault();
@@ -29,23 +28,23 @@ namespace Alkamous.View
         private void CheckedIsSelected(string WhoSender)
         {
             //directly assign the result
-            bool Result = WhoSender == "ExportTerms";
+            bool Result = WhoSender == "ExportCustomers";
 
             txtNewPth.Text = "";
             csvDataList = null;
 
-            BtnExportTerms.Checked = Result;
-            BtnImportTerms.Checked = !(Result);
+            BtnExportCustomers.Checked = Result;
+            BtnImportCustomers.Checked = !(Result);
 
-            BtnExportTerms.Enabled = !(Result);
-            BtnImportTerms.Enabled = (Result);
+            BtnExportCustomers.Enabled = !(Result);
+            BtnImportCustomers.Enabled = (Result);
 
             BtnSaveConfiguration.Enabled = false;
         }
 
         private bool CheckInputAndPath()
         {
-            if ((BtnExportTerms.Checked == false) & (BtnImportTerms.Checked == false))
+            if ((BtnExportCustomers.Checked == false) & (BtnImportCustomers.Checked == false))
             {
                 MessageBox.Show("please select one of the options of below");
                 return false;
@@ -67,51 +66,41 @@ namespace Alkamous.View
             csvDataList = null;
             txtNewPth.Text = "";
 
-            BtnExportTerms.Checked = false;
-            BtnImportTerms.Checked = false;
+            BtnExportCustomers.Checked = false;
+            BtnImportCustomers.Checked = false;
 
-            BtnExportTerms.Enabled = true;
-            BtnImportTerms.Enabled = true;
+            BtnExportCustomers.Enabled = true;
+            BtnImportCustomers.Enabled = true;
 
             BtnSaveConfiguration.Enabled = false;
 
 
         }
 
-        private void BtnSaveConfiguration_Click(object sender, EventArgs e)
+        private void BtnExportCustomers_CheckedChanged(object sender, EventArgs e)
         {
-            if (CheckInputAndPath())
+            if (BtnExportCustomers.Checked)
             {
-                Cursor.Current = Cursors.WaitCursor;
-
-                if (BtnExportTerms.Checked)
-                {
-                    ExportTermsData();
-                    ResetToDefault();
-                }
-                else
-                {
-                    AddTermsToServer();
-                    ResetToDefault();
-                }
-                Cursor.Current = Cursors.Default;
-
+                CheckedIsSelected("ExportCustomers");
             }
         }
 
-        private void BtnResetToDefault_Click(object sender, EventArgs e)
+        private void BtnImportCustomers_CheckedChanged(object sender, EventArgs e)
         {
-            ResetToDefault();
+            if (BtnImportCustomers.Checked)
+            {
+                CheckedIsSelected("ImportCustomers");
+            }
         }
 
         private void BtnOpenPath_Click(object sender, EventArgs e)
         {
-            if ((BtnExportTerms.Checked == false) & (BtnImportTerms.Checked == false))
+            if ((BtnExportCustomers.Checked == false) & (BtnImportCustomers.Checked == false))
             {
                 MessageBox.Show("please select one of the options above");
                 return;
             }
-            if (BtnExportTerms.Checked)
+            if (BtnExportCustomers.Checked)
             {
                 using (var folderBrowser = new FolderBrowserDialog
                 {
@@ -130,7 +119,7 @@ namespace Alkamous.View
                 using (var _openFileDialog = new OpenFileDialog
                 {
                     Filter = "CSV files (*.csv)|*.csv",
-                    Title = "Select Terms CSV file"
+                    Title = "Select Customers CSV file"
                 })
                 {
                     if (_openFileDialog.ShowDialog() != DialogResult.OK)
@@ -142,7 +131,7 @@ namespace Alkamous.View
                     using (var reader = new StreamReader(filePath, Encoding.Default))
                     using (var csv = new CsvReader(reader, new CsvConfiguration(CultureInfo.InvariantCulture)))
                     {
-                        var records = csv.GetRecords<CTB_Terms>().ToList();
+                        var records = csv.GetRecords<CTB_CustomerInfo>().ToList();
 
                         if (records.Count > 0)
                         {
@@ -158,36 +147,53 @@ namespace Alkamous.View
             }
         }
 
-        private void BtnExportTerms_CheckedChanged(object sender, EventArgs e)
+        private void BtnSaveConfiguration_Click(object sender, EventArgs e)
         {
-            if (BtnExportTerms.Checked)
+            if (CheckInputAndPath())
             {
-                CheckedIsSelected("ExportTerms");
+                Cursor.Current = Cursors.WaitCursor;
+
+                if (BtnExportCustomers.Checked)
+                {
+                    ExportCustomersData();
+                    ResetToDefault();
+                }
+                else
+                {
+                    AddCustomersToServer();
+                    ResetToDefault();
+                }
+                Cursor.Current = Cursors.Default;
+
             }
         }
 
-        private void BtnImportTerms_CheckedChanged(object sender, EventArgs e)
+        private void BtnResetToDefault_Click(object sender, EventArgs e)
         {
-            if (BtnImportTerms.Checked)
-            {
-                CheckedIsSelected("ImportTerms");
-            }
+            ResetToDefault();
         }
 
-        private void AddTermsToServer()
+
+        private void AddCustomersToServer()
         {
 
             try
             {
                 if (csvDataList != null)
                 {
-                    int TotalRows = csvDataList.Count;
-                    foreach (var _terms in csvDataList)
+                    int totalCustomers = csvDataList.Count; ;
+                    int importedCustomers = 0;
+
+                    foreach (var _Customers in csvDataList)
                     {
-                        OperationsofTerms.Add_TermLIST(_terms);
+                        if (!operationsofCustomerInfo.Check_CustomerInfo_NotDuplicate(_Customers.Customer_Mob))
+                        {
+                            operationsofCustomerInfo.Add_CustomerInfo(_Customers);
+                            importedCustomers++;
+                        }
                     }
-                    OperationsofTerms.InsertBulk();
-                    MessageBox.Show($"{TotalRows} Terms has been imported successfully");
+
+                    MessageBox.Show($"{importedCustomers} Customers has been imported successfully from {totalCustomers} Customers");
                     return;
                 }
                 MessageBox.Show("failed try later");
@@ -202,22 +208,22 @@ namespace Alkamous.View
 
         }
 
-        private void ExportTermsData()
+        private void ExportCustomersData()
         {
             try
             {
 
                 DataTable ResultOfData = new DataTable();
-                ResultOfData = OperationsofTerms.Get_AllTerms();
+                ResultOfData = operationsofCustomerInfo.Get_All();
 
                 if (ResultOfData.Rows.Count > 0)
                 {
                     string strPath = txtNewPth.Text.Trim();
-                    string csvFilePath = Path.Combine(strPath, "ALKAMOUS Terms.CSV");
+                    string csvFilePath = Path.Combine(strPath, "ALKAMOUS Customers.CSV");
 
                     int TotalRows = ResultOfData.Rows.Count;
 
-                    csvDataList = ResultOfData.ConvertDataTableToList<CTB_Terms>();
+                    csvDataList = ResultOfData.ConvertDataTableToList<CTB_CustomerInfo>();
 
 
                     using (var fileStream = new FileStream(csvFilePath, FileMode.Create, FileAccess.Write))
@@ -230,13 +236,13 @@ namespace Alkamous.View
                                 csv.WriteRecords(csvDataList);
 
                             }
-                            MessageBox.Show($"{TotalRows} Terms has been Export successfully", "Info");
+                            MessageBox.Show($"{TotalRows} Customers has been Export successfully", "Info");
                         }
                     }
                 }
                 else
                 {
-                    MessageBox.Show($" NO Terms Export !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show($" NO Customers Export !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
@@ -247,6 +253,8 @@ namespace Alkamous.View
                 MessageBox.Show(ex.Message);
             }
         }
+
+
 
         private void BtnBackToImportAndExport_Click(object sender, EventArgs e)
         {
@@ -268,5 +276,4 @@ namespace Alkamous.View
             }
         }
     }
-
 }

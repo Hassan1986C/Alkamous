@@ -9,44 +9,32 @@ namespace Alkamous.Model
 {
     public static class ExtensionMethod
     {
+
         #region ExtensionMethod to DataTable ToList<T>
 
-        public static List<T> ToList<T>(this DataTable table) where T : class, new()
+        public static List<T> ConvertDataTableToList<T>(this DataTable table) where T : class, new()
         {
-            try
-            {
-                List<T> list = new List<T>();
+            List<T> list = new List<T>();
+            var properties = typeof(T).GetProperties();
 
-                foreach (var row in table.AsEnumerable())
+
+            foreach (DataRow row in table.Rows)
+            {
+                T item = new T();
+                foreach (var property in properties)
                 {
-                    T obj = new T();
-
-                    foreach (var prop in obj.GetType().GetProperties())
+                    if (table.Columns.Contains(property.Name) && row[property.Name] != DBNull.Value)
                     {
-                        try
-                        {
-                            PropertyInfo propertyInfo = obj.GetType().GetProperty(prop.Name);
-                            propertyInfo.SetValue(obj, Convert.ChangeType(row[prop.Name], propertyInfo.PropertyType), null);
-                        }
-                        catch
-                        {
-
-                            continue;
-                        }
+                        PropertyInfo propertyInfo = property;
+                        property.SetValue(item, Convert.ChangeType(row[property.Name], propertyInfo.PropertyType));
                     }
-
-                    list.Add(obj);
                 }
+                list.Add(item);
+            }
 
-                return list;
-            }
-            catch
-            {
-                return null;
-            }
+            return list;
         }
         #endregion
-
 
         #region ExtensionMethod to stringRemoveSpecialCharacters
         public static string RemoveSpecialCharacters(this string str)

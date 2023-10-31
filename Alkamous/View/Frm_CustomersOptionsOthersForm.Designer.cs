@@ -31,7 +31,7 @@
             this.BtnTerms = new System.Windows.Forms.Button();
             this.BtnProducts = new System.Windows.Forms.Button();
             this.BtnBanks = new System.Windows.Forms.Button();
-            this.BtnNote = new System.Windows.Forms.Button();
+            this.BtnImportExport = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // BtnTerms
@@ -86,23 +86,23 @@
             this.BtnBanks.UseVisualStyleBackColor = false;
             this.BtnBanks.Click += new System.EventHandler(this.BtnBanks_Click);
             // 
-            // BtnNote
+            // BtnImportExport
             // 
-            this.BtnNote.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(61)))), ((int)(((byte)(77)))), ((int)(((byte)(178)))));
-            this.BtnNote.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BtnNote.Enabled = false;
-            this.BtnNote.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.BtnNote.FlatAppearance.BorderSize = 0;
-            this.BtnNote.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.MenuHighlight;
-            this.BtnNote.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnNote.Font = new System.Drawing.Font("Century Gothic", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnNote.ForeColor = System.Drawing.Color.White;
-            this.BtnNote.Location = new System.Drawing.Point(592, 399);
-            this.BtnNote.Name = "BtnNote";
-            this.BtnNote.Size = new System.Drawing.Size(337, 272);
-            this.BtnNote.TabIndex = 10;
-            this.BtnNote.Text = "Not Ready";
-            this.BtnNote.UseVisualStyleBackColor = false;
+            this.BtnImportExport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(61)))), ((int)(((byte)(77)))), ((int)(((byte)(178)))));
+            this.BtnImportExport.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BtnImportExport.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.BtnImportExport.FlatAppearance.BorderSize = 0;
+            this.BtnImportExport.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.BtnImportExport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnImportExport.Font = new System.Drawing.Font("Century Gothic", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnImportExport.ForeColor = System.Drawing.Color.White;
+            this.BtnImportExport.Location = new System.Drawing.Point(592, 399);
+            this.BtnImportExport.Name = "BtnImportExport";
+            this.BtnImportExport.Size = new System.Drawing.Size(337, 272);
+            this.BtnImportExport.TabIndex = 10;
+            this.BtnImportExport.Text = "Import and Export";
+            this.BtnImportExport.UseVisualStyleBackColor = false;
+            this.BtnImportExport.Click += new System.EventHandler(this.BtnImportExport_Click);
             // 
             // Frm_CustomersOptionsOthersForm
             // 
@@ -112,7 +112,7 @@
             this.Controls.Add(this.BtnTerms);
             this.Controls.Add(this.BtnProducts);
             this.Controls.Add(this.BtnBanks);
-            this.Controls.Add(this.BtnNote);
+            this.Controls.Add(this.BtnImportExport);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Frm_CustomersOptionsOthersForm";
             this.Text = "Frm_CustomersOptionsOthersForm";
@@ -125,6 +125,6 @@
         private System.Windows.Forms.Button BtnTerms;
         private System.Windows.Forms.Button BtnProducts;
         private System.Windows.Forms.Button BtnBanks;
-        private System.Windows.Forms.Button BtnNote;
+        private System.Windows.Forms.Button BtnImportExport;
     }
 }
